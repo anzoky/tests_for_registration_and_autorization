@@ -1,1 +1,1 @@
-# tests_for_registration_and_autorization
+# tests_for_registration_and_authorization
