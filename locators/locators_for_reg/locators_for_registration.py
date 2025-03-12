@@ -21,4 +21,6 @@ class RegistrationLocators:
 
     BUTTON_REGISTRATION = (By.CSS_SELECTOR, 'button[class="ui button blue"]')
 
+    LIST_OF_ERROR_MESSAGES = (By.CSS_SELECTOR, 'div[class="mt-2 text-sm text-rose-600 italic"]')
+
     ALERT_MESSAGE = (By.CSS_SELECTOR, 'div[role="alert"]')

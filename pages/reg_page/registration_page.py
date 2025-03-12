@@ -52,3 +52,14 @@ class RegistrationPage(BasePage):
         expected_result = registration_test_data[case_name]['expected']
         return error_text, expected_result
 
+    def negative_registration_boundary_test_cases(self, case_name):
+        self.fill_registration_form(
+            email=registration_test_data[case_name]['email'],
+            password=registration_test_data[case_name]['password'],
+            confirm_password=registration_test_data[case_name]['confirm_password'],
+            name=registration_test_data[case_name]['name']
+        )
+        self.element_is_visible(self.locators.BUTTON_REGISTRATION).click()
+        list_of_error_messages = self.elements_are_visible(self.locators.LIST_OF_ERROR_MESSAGES)
+        return [value.text for value in list_of_error_messages]
+

@@ -64,3 +64,16 @@ class TestRegistration:
             error_message, expected_result = registration_page.negative_registration_with_incorrect_data(case_name, locator=error_locator)
             assert error_message == expected_result, \
                 f'Ошибка "{error_message}" не соответствует ожидаемой "{expected_result}"'
+
+        @pytest.mark.parametrize('case_name', [
+            'all_fields_empty',
+            'email_empty',
+            'password_is_empty',
+            'confirm_password_is_empty'
+        ])
+        def test_registration_boundary_test_cases(self, driver, case_name):
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page.open()
+            list_of_errors = registration_page.negative_registration_boundary_test_cases(case_name)
+            assert list_of_errors == registration_test_data[case_name]['expected'], \
+                f'Ошибка "{list_of_errors}" не соответствует ожидаемой "{registration_test_data[case_name]['expected']}"'
