@@ -170,7 +170,7 @@ registration_test_data = {
         'name': 'User',
         'expected': ['Это поле обязательно']
     },
-    'password_is_empty': {
+    'passwords_is_empty': {
         'email': 'user@example.com',
         'password': '',
         'confirm_password': '',

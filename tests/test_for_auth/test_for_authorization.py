@@ -1,20 +1,27 @@
+import allure
 import pytest
 
 from pages.auth_page.authorization_page import AuthorizationPage
 from conftest import driver
 
 
+@allure.suite('Форма авторизации')
 class TestAuthorization:
+
+    @allure.feature('Позитивные тесты формы авторизации')
     class TestSuccessfulAuthorization:
 
+        @allure.title('Успешная авторизация')
         def test_successful_authorization(self, driver):
             authorization_page = AuthorizationPage(driver, 'http://95.182.122.183/login')
             authorization_page.open()
             alert_message = authorization_page.fill_all_fields_for_authorization()
             assert alert_message == 'Вы успешно залогинились', f'Ошибка при логине: {alert_message}'
 
+    @allure.feature('Негативные тесты формы авторизации')
     class TestUnsuccessfulAuthorization:
 
+        @allure.title('Авторизация с некорректными данными')
         @pytest.mark.parametrize('case_name', [
             'password_too_long',
             'email_without_at'
@@ -26,6 +33,7 @@ class TestAuthorization:
             assert alert_message == expected_message, \
                 f'Ошибка "{alert_message}" не соответствует ожидаемой "{expected_message[case_name]['expected']}"'
 
+        @allure.title('Тест на кликабельность кнопки авторизации при незаполненных полях')
         def test_check_auth_button_is_disabled_with_empty_fields(self, driver):
             authorization_page = AuthorizationPage(driver, 'http://95.182.122.183/login')
             authorization_page.open()
