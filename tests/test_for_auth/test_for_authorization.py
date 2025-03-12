@@ -1,5 +1,4 @@
-from pages.authorization_page import AuthorizationPage
-from pages.registration_page import RegistrationPage
+from pages.auth_page.authorization_page import AuthorizationPage
 from conftest import driver
 
 
