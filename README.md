@@ -22,4 +22,4 @@
    allure serve allure-results
 
 **Аллюр отчет**
-![Allure Report]()
+![Allure Report](https://github.com/anzoky/tests_for_registration_and_autorization/blob/main/allure_report_reg_auth.png)
