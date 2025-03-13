@@ -196,5 +196,50 @@ authorization_test_data = {
         'email': 'invalidemail.com',
         'password': valid_password,
         'expected': 'Неверный логин или пароль'
+    },
+    'invalid_email_format': {
+        'email': 'user@.com',
+        'password': valid_password,
+        'expected': 'Неверный логин или пароль'
+    },
+    'password_too_short': {
+        'email': valid_email,
+        'password': 'a',
+        'expected': 'Неверный логин или пароль'
+    },
+    'sql_injection_email': {
+        'email': "admin' OR '1'='1'--",
+        'password': valid_password,
+        'expected': 'Неверный логин или пароль'
+    },
+    'sql_injection_password': {
+        'email': valid_email,
+        'password': "' OR '1'='1'--",
+        'expected': 'Неверный логин или пароль'
+    },
+    'unicode_email': {
+        'email': 'юзер@example.com',
+        'password': valid_password,
+        'expected': 'Неверный логин или пароль'
+    },
+    'unicode_password': {
+        'email': valid_email,
+        'password': 'пароль',
+        'expected': 'Неверный логин или пароль'
+    }
+}
+
+auth_test_data_empty_fields_test_cases = {
+    'empty_fields': {
+        'email': '',
+        'password': ''
+    },
+    'empty_email': {
+        'email': '',
+        'password': valid_password
+    },
+    'empty_password': {
+        'email': valid_email,
+        'password': ''
     }
 }

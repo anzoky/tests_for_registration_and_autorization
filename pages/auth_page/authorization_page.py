@@ -2,7 +2,7 @@ import allure
 
 from locators.locators_for_auth.locators_for_authorization import AuthorizationLocators
 from pages.base_page import BasePage
-from data.user_data import DATA_FOR_SUCCESSFUL_REG_AND_AUTH, authorization_test_data
+from data.user_data import DATA_FOR_SUCCESSFUL_REG_AND_AUTH, authorization_test_data, auth_test_data_empty_fields_test_cases
 
 
 class AuthorizationPage(BasePage):
@@ -41,6 +41,10 @@ class AuthorizationPage(BasePage):
         return alert_message, expect_message
 
     @allure.step('Проверка кликабельности кнопки авторизации с пустыми полями')
-    def check_auth_button_is_disabled_with_empty_fields(self):
+    def check_auth_button_is_disabled_with_empty_fields(self, case_name):
+        self.fill_authorization_form(
+            email=auth_test_data_empty_fields_test_cases[case_name]['email'],
+            password=auth_test_data_empty_fields_test_cases[case_name]['password']
+        )
         auth_button = self.element_is_present(self.locators.ENTER_BUTTON_DISABLED)
         return auth_button.is_enabled()

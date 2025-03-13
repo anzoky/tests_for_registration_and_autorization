@@ -24,19 +24,30 @@ class TestAuthorization:
         @allure.title('Авторизация с некорректными данными')
         @pytest.mark.parametrize('case_name', [
             'password_too_long',
-            'email_without_at'
+            'email_without_at',
+            'invalid_email_format',
+            'password_too_short',
+            'sql_injection_email',
+            'sql_injection_password',
+            'unicode_email',
+            'unicode_password'
         ])
         def test_unsuccessful_authorization(self, driver, case_name):
             authorization_page = AuthorizationPage(driver, 'http://95.182.122.183/login')
             authorization_page.open()
             alert_message, expected_message = authorization_page.negative_authorization(case_name)
             assert alert_message == expected_message, \
-                f'Ошибка "{alert_message}" не соответствует ожидаемой "{expected_message[case_name]['expected']}"'
+                f'Ошибка "{alert_message}" не соответствует ожидаемой "{expected_message}"'
 
+        @pytest.mark.parametrize('case_name', [
+            'empty_fields',
+            'empty_email',
+            'empty_password'
+        ])
         @allure.title('Тест на кликабельность кнопки авторизации при незаполненных полях')
-        def test_check_auth_button_is_disabled_with_empty_fields(self, driver):
+        def test_check_auth_button_is_disabled_with_empty_fields(self, driver, case_name):
             authorization_page = AuthorizationPage(driver, 'http://95.182.122.183/login')
             authorization_page.open()
-            auth_button = authorization_page.check_auth_button_is_disabled_with_empty_fields()
+            auth_button = authorization_page.check_auth_button_is_disabled_with_empty_fields(case_name)
             assert auth_button is False, \
                 'При незаполненных полях кнопка авторизации кликабельна'
