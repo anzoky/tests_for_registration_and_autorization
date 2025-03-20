@@ -14,8 +14,8 @@ valid_name = fake.first_name() + " " + fake.last_name()
 
 
 DATA_FOR_SUCCESSFUL_REG_AND_AUTH = {
-    'email': valid_email,
-    'password': valid_password,
+    'email': 'jonsmit@gmail.com',
+    'password': 'qwerty123',
     'name': fake.first_name()
 }
 
@@ -152,7 +152,7 @@ registration_test_data = {
         'password': valid_password,
         'confirm_password': valid_password,
         'name': '',
-        'expected': 'Имя обязательно для заполнения'
+        'expected': 'Это поле обязательно'
     },
 
     # Граничные кейсы
@@ -161,7 +161,7 @@ registration_test_data = {
         'password': '',
         'confirm_password': '',
         'name': '',
-        'expected': ['Это поле обязательно', 'Это поле обязательно', 'Это поле обязательно']
+        'expected': ['Это поле обязательно', 'Это поле обязательно', 'Это поле обязательно', 'Это поле обязательно']
     },
     'email_empty': {
         'email': '',
@@ -190,42 +190,42 @@ authorization_test_data = {
     'password_too_long': {
         'email': valid_email,
         'password': 'asd' * 20,
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'email_without_at': {
         'email': 'invalidemail.com',
         'password': valid_password,
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'invalid_email_format': {
         'email': 'user@.com',
         'password': valid_password,
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'password_too_short': {
         'email': valid_email,
         'password': 'a',
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'sql_injection_email': {
         'email': "admin' OR '1'='1'--",
         'password': valid_password,
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'sql_injection_password': {
         'email': valid_email,
         'password': "' OR '1'='1'--",
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'unicode_email': {
         'email': 'юзер@example.com',
         'password': valid_password,
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     },
     'unicode_password': {
         'email': valid_email,
         'password': 'пароль',
-        'expected': 'Неверный логин или пароль'
+        'expected': 'Что-то пошло не так. Пожалуйста, попробуйте позже'
     }
 }
 

@@ -14,17 +14,9 @@ class TestRegistration:
         @allure.title('Успешная регистрация с заполненными полями')
         def test_positive_registration(self, driver):
 
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183:3000/sign_up')
             registration_page.open()
             alert_text = registration_page.positive_registration()
-            assert alert_text == 'Вы успешно зарегистрировались', f'Ошибка при регистрации пользователя: {alert_text}'
-
-        @allure.title('Успешная регистрация без имени')
-        def test_positive_registration_without_name(self, driver):
-
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
-            registration_page.open()
-            alert_text = registration_page.positive_registration_without_name()
             assert alert_text == 'Вы успешно зарегистрировались', f'Ошибка при регистрации пользователя: {alert_text}'
 
     @allure.feature('Негативные тесты формы регистрации')
@@ -41,7 +33,7 @@ class TestRegistration:
             ('email_with_ip', RegistrationLocators.EMAIL_ERROR),
         ])
         def test_registration_with_incorrect_email(self, driver, case_name, error_locator):
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183:3000/sign_up')
             registration_page.open()
             error_message, expected_result = registration_page.negative_registration_with_incorrect_data(case_name, locator=error_locator)
             assert error_message == expected_result, \
@@ -58,7 +50,7 @@ class TestRegistration:
             ('confirm_password_empty', RegistrationLocators.CONFIRM_PASSWORD_ERROR)
         ])
         def test_registration_with_incorrect_password(self, driver, case_name, error_locator):
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183:3000/sign_up')
             registration_page.open()
             error_message, expected_result = registration_page.negative_registration_with_incorrect_data(case_name, locator=error_locator)
             assert error_message == expected_result, \
@@ -66,10 +58,11 @@ class TestRegistration:
 
         @allure.title('Негативные тесты для поля имя')
         @pytest.mark.parametrize('case_name, error_locator', [
-            ('name_too_long', RegistrationLocators.NAME_ERROR)
+            ('name_too_long', RegistrationLocators.NAME_ERROR),
+            ('name_empty', RegistrationLocators.NAME_ERROR)
         ])
         def test_registration_with_incorrect_name(self, driver, case_name, error_locator):
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183:3000/sign_up')
             registration_page.open()
             error_message, expected_result = registration_page.negative_registration_with_incorrect_data(case_name, locator=error_locator)
             assert error_message == expected_result, \
@@ -83,7 +76,7 @@ class TestRegistration:
             'confirm_password_is_empty'
         ])
         def test_registration_boundary_test_cases(self, driver, case_name):
-            registration_page = RegistrationPage(driver, 'http://95.182.122.183/sign_up')
+            registration_page = RegistrationPage(driver, 'http://95.182.122.183:3000/sign_up')
             registration_page.open()
             list_of_errors = registration_page.negative_registration_boundary_test_cases(case_name)
             assert list_of_errors == registration_test_data[case_name]['expected'], \

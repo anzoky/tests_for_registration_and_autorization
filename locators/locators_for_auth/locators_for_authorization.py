@@ -5,7 +5,7 @@ class AuthorizationLocators:
 
     EMAIL_FIELD = (By.CSS_SELECTOR, 'input[id="email"]')
 
-    PASSWORD_FIELD = (By.CSS_SELECTOR, 'input[id="pass"]')
+    PASSWORD_FIELD = (By.CSS_SELECTOR, 'input[id="password"]')
 
     ENTER_BUTTON_ENABLED = (By.CSS_SELECTOR, 'button[class="ui button blue"]')
 

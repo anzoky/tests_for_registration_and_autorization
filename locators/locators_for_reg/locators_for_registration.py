@@ -15,9 +15,9 @@ class RegistrationLocators:
     CONFIRM_PASSWORD_ERROR = (By.XPATH,
                                     '//input[@id="pass2"]/following-sibling::div[contains(@class, "mt-2 text-sm text-rose-600 italic")]')
 
-    NAME_FIELD = (By.CSS_SELECTOR, 'input[id="name"]')
+    NAME_FIELD = (By.CSS_SELECTOR, 'input[id="username"]')
     NAME_ERROR = (By.XPATH,
-                  '//input[@id="name"]/following-sibling::div[contains(@class, "mt-2 text-sm text-rose-600 italic")]')
+                  '//input[@id="username"]/following-sibling::div[contains(@class, "mt-2 text-sm text-rose-600 italic")]')
 
     BUTTON_REGISTRATION = (By.CSS_SELECTOR, 'button[class="ui button blue"]')
 
